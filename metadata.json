@@ -1,0 +1,8 @@
+{
+  "name": "Vayu Vision",
+  "description": "Next-Gen Assistive Intelligence for Sensory Empowerment",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
