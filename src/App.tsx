@@ -447,42 +447,42 @@ export default function App() {
         {/* Hero Section with Patterns */}
         <main className="relative pt-24 md:pt-32 pb-16 md:pb-20 px-4 md:px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
           {/* Creative Background Patterns */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1000px] pointer-events-none -z-10 overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-gradient-to-b from-emerald-500/20 via-purple-500/10 to-transparent rounded-full blur-[140px] opacity-40" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[120vh] pointer-events-none -z-10 overflow-hidden">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[140vw] h-[140vw] bg-gradient-to-b from-emerald-500/10 via-purple-500/5 to-transparent rounded-full blur-[160px] opacity-30 animate-pulse" />
             
-            {/* Pulsing Orbs */}
+            {/* Animated Floating Shapes */}
             <motion.div 
               animate={{ 
-                x: [0, 150, -100, 0],
-                y: [0, -150, 100, 0],
-                scale: [1, 1.2, 0.9, 1],
+                y: [0, -50, 0],
+                x: [0, 30, 0],
+                rotate: [0, 10, 0],
               }}
               transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-[120px]"
+              className="absolute top-[10%] left-[5%] w-32 md:w-80 h-32 md:h-80 border border-emerald-500/10 rounded-full blur-3xl"
             />
             <motion.div 
               animate={{ 
-                x: [0, -200, 150, 0],
-                y: [0, 100, -200, 0],
-                scale: [1, 0.8, 1.3, 1],
+                y: [0, 60, 0],
+                x: [0, -40, 0],
+                rotate: [0, -15, 0],
               }}
               transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[140px]"
+              className="absolute top-[45%] right-[-5%] w-48 md:w-[600px] h-48 md:h-[600px] border border-purple-500/5 rounded-full blur-[100px]"
             />
 
             {/* Grid Pattern with Reveal */}
-            <div className="absolute inset-0 grid grid-cols-6 md:grid-cols-12 gap-px mask-gradient-to-b opacity-20">
-              {Array.from({ length: 144 }).map((_, i) => (
+            <div className="absolute inset-0 grid grid-cols-4 md:grid-cols-12 gap-px mask-gradient-to-b opacity-[0.07]">
+              {Array.from({ length: 96 }).map((_, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: [0.03, 0.1, 0.03] }}
+                  animate={{ opacity: [0.03, 0.12, 0.03] }}
                   transition={{
-                    duration: Math.random() * 4 + 2,
+                    duration: Math.random() * 5 + 4,
                     repeat: Infinity,
-                    delay: Math.random() * 5,
+                    delay: Math.random() * 3,
                   }}
-                  className="bg-white/20 w-full h-24 border border-white/5"
+                  className="bg-white/20 w-full h-32 md:h-64 border border-white/5"
                 />
               ))}
             </div>
@@ -523,7 +523,7 @@ export default function App() {
                 hidden: { opacity: 0, scale: 0.95 },
                 visible: { opacity: 1, scale: 1 }
               }}
-              className="text-5xl sm:text-7xl md:text-[10rem] font-black tracking-tighter mb-6 md:mb-8 leading-[0.8] md:leading-[0.7] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20 select-none px-4"
+              className="text-6xl sm:text-8xl md:text-[11rem] font-black tracking-tighter mb-6 md:mb-8 leading-[0.8] md:leading-[0.7] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/10 select-none px-4"
             >
               VAYU <br className="hidden md:block" />
               <motion.span 
@@ -532,7 +532,7 @@ export default function App() {
                   textShadow: ["0 0 20px rgba(16,185,129,0)", "0 0 40px rgba(16,185,129,0.5)", "0 0 20px rgba(16,185,129,0)"],
                 }}
                 transition={{ duration: 8, repeat: Infinity }}
-                className="italic font-light text-3xl sm:text-5xl md:text-8xl md:decoration-emerald-500 md:underline md:underline-offset-[12px]"
+                className="italic font-light text-4xl sm:text-6xl md:text-9xl md:decoration-emerald-500 md:underline md:underline-offset-[16px]"
               >
                 VISION
               </motion.span>
@@ -559,7 +559,7 @@ export default function App() {
                 whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(16,185,129,0.3)" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsLandingVisible(false)}
-                className="group relative px-10 py-6 bg-white text-black font-black rounded-full flex items-center gap-4 overflow-hidden border-4 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+                className="group relative px-10 py-6 bg-white text-black font-black rounded-full flex items-center gap-4 overflow-hidden border-4 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)] w-full md:w-auto text-center justify-center"
               >
                 <motion.div 
                   initial={{ x: "-100%" }}
@@ -570,6 +570,26 @@ export default function App() {
                 <span className="relative z-10 text-xl group-hover:text-white transition-colors duration-300">Get Started</span>
                 <ArrowRight className="relative z-10 transition-transform group-hover:translate-x-2 group-hover:text-white" />
               </motion.button>
+            </motion.div>
+
+            {/* Quick Stats / Creative Accents */}
+            <motion.div 
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1 }
+              }}
+              className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700"
+            >
+              {[
+                { label: "AI Latency", value: "<150ms" },
+                { label: "Accuracy", value: "99.8%" },
+                { label: "Privacy", value: "E2E Encrypted" },
+              ].map((stat, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <span className="text-2xl md:text-3xl font-bold tracking-tighter text-white">{stat.value}</span>
+                  <span className="text-[10px] md:text-xs uppercase tracking-widest text-zinc-500 font-bold">{stat.label}</span>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 
