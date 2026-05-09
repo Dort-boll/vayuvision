@@ -5,6 +5,18 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    @apply bg-zinc-950 text-white antialiased;
+    overscroll-behavior-y: none;
+  }
+}
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -14,16 +26,20 @@
     scrollbar-width: none;
   }
 
-  @keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  .animate-spin-slow {
-    animation: spin-slow 15s linear infinite;
+  .text-glow {
+    text-shadow: 0 0 20px rgba(16,185,129,0.3);
   }
 
   .mask-gradient-to-b {
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
 }

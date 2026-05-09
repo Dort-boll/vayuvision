@@ -396,14 +396,18 @@ export default function App() {
   };
 
   const handleLogin = async () => {
-    if (window.puter) {
-      try {
-        await window.puter.auth.signIn();
-        const userInfo = await window.puter.auth.getUser();
+    if (!window.puter) {
+      alert("AI engine is still initializing. Please try again in a few seconds.");
+      return;
+    }
+    try {
+      await window.puter.auth.signIn();
+      const userInfo = await window.puter.auth.getUser();
+      if (userInfo) {
         setUser(userInfo);
-      } catch (err) {
-        console.error("Login failed:", err);
       }
+    } catch (err) {
+      console.error("Login failed:", err);
     }
   };
 
@@ -411,29 +415,29 @@ export default function App() {
     return (
       <div className="min-h-screen w-full bg-zinc-950 text-white font-sans selection:bg-emerald-500/30 overflow-x-hidden">
         {/* Navigation Logo & Login */}
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-4 backdrop-blur-xl bg-black/20 border-b border-white/5">
+        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-6 py-3 md:py-4 backdrop-blur-xl bg-black/20 border-b border-white/5">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.5)]">
-              <Eye size={18} className="text-black" />
+            <div className="w-7 h-7 md:w-8 md:h-8 rounded-lg bg-emerald-500 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+              <Eye size={16} className="text-black md:w-[18px]" />
             </div>
-            <span className="text-xl font-bold tracking-tighter">VAYU VISION</span>
+            <span className="text-lg md:text-xl font-bold tracking-tighter">VAYU VISION</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLogin}
-              className="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full border border-white/10 transition-all"
+              className="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-3 md:px-4 py-1.5 md:py-2 rounded-full border border-white/10 transition-all"
             >
               {user ? (
                 <>
-                  <User size={18} className="text-emerald-400" />
-                  <span className="text-sm font-medium">{user.username}</span>
+                  <User size={16} className="text-emerald-400" />
+                  <span className="text-xs md:text-sm font-medium truncate max-w-[80px] md:max-w-none">{user.username}</span>
                 </>
               ) : (
                 <>
-                  <LogIn size={18} className="text-zinc-400" />
-                  <span className="text-sm font-medium">Log In</span>
+                  <LogIn size={16} className="text-zinc-400" />
+                  <span className="text-xs md:text-sm font-medium">Log In</span>
                 </>
               )}
             </motion.button>
@@ -441,7 +445,7 @@ export default function App() {
         </nav>
 
         {/* Hero Section with Patterns */}
-        <main className="relative pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <main className="relative pt-24 md:pt-32 pb-16 md:pb-20 px-4 md:px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
           {/* Creative Background Patterns */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1000px] pointer-events-none -z-10 overflow-hidden">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] bg-gradient-to-b from-emerald-500/20 via-purple-500/10 to-transparent rounded-full blur-[140px] opacity-40" />
@@ -498,16 +502,17 @@ export default function App() {
               hidden: { opacity: 0 },
               visible: { 
                 opacity: 1,
-                transition: { staggerChildren: 0.2 }
+                transition: { staggerChildren: 0.2, delayChildren: 0.3 }
               }
             }}
+            className="flex flex-col items-center"
           >
             <motion.div 
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 }
               }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6 tracking-widest uppercase"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] md:text-xs font-semibold mb-6 tracking-widest uppercase"
             >
               <Zap size={12} fill="currentColor" />
               Empowering Sensory Boundaries
@@ -518,16 +523,16 @@ export default function App() {
                 hidden: { opacity: 0, scale: 0.95 },
                 visible: { opacity: 1, scale: 1 }
               }}
-              className="text-7xl md:text-[10rem] font-black tracking-tighter mb-8 leading-[0.7] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20 select-none"
+              className="text-5xl sm:text-7xl md:text-[10rem] font-black tracking-tighter mb-6 md:mb-8 leading-[0.8] md:leading-[0.7] bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/20 select-none px-4"
             >
-              VAYU <br/>
+              VAYU <br className="hidden md:block" />
               <motion.span 
                 animate={{ 
                   color: ["#10b981", "#8b5cf6", "#3b82f6", "#10b981"],
                   textShadow: ["0 0 20px rgba(16,185,129,0)", "0 0 40px rgba(16,185,129,0.5)", "0 0 20px rgba(16,185,129,0)"],
                 }}
                 transition={{ duration: 8, repeat: Infinity }}
-                className="italic font-light text-5xl md:text-8xl decoration-emerald-500 underline underline-offset-[12px]"
+                className="italic font-light text-3xl sm:text-5xl md:text-8xl md:decoration-emerald-500 md:underline md:underline-offset-[12px]"
               >
                 VISION
               </motion.span>
@@ -538,9 +543,9 @@ export default function App() {
                 hidden: { opacity: 0 },
                 visible: { opacity: 1 }
               }}
-              className="text-lg md:text-2xl text-zinc-400 max-w-2xl mb-12 leading-relaxed font-light"
+              className="text-base md:text-2xl text-zinc-400 max-w-2xl mb-12 leading-relaxed font-light px-6"
             >
-              Experience the world through advanced AGI. Vayu Vision is a revolutionary sensory companion designed to provide seamless autonomy for users with vision and hearing impairments.
+              Experience the world through advanced AGI. Vayu Vision is a revolutionary sensory companion designed to provide seamless autonomy.
             </motion.p>
 
             <motion.div 
@@ -569,45 +574,41 @@ export default function App() {
           </motion.div>
 
           {/* Feature Grid */}
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-40 text-left relative">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-4 md:grid-8 mt-20 md:mt-40 text-left relative px-4">
             {/* Decorative background glow for features */}
-            <div className="absolute inset-0 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute inset-0 bg-emerald-500/5 blur-[80px] md:blur-[120px] rounded-full pointer-events-none" />
             
             {[
               {
-                icon: <Eye className="text-emerald-400" />,
+                icon: <Eye className="text-emerald-400" size={24} />,
                 title: "Real-time Vision",
                 desc: "High-precision object and text identification focused on navigational safety.",
               },
               {
-                icon: <Zap className="text-purple-400" />,
+                icon: <Zap className="text-purple-400" size={24} />,
                 title: "Vayu AGI",
                 desc: "Proprietary intelligence engine that provides human-like context to your surroundings.",
               },
               {
-                icon: <Shield className="text-blue-400" />,
+                icon: <Shield className="text-blue-400" size={24} />,
                 title: "Security First",
-                desc: "Your data stays on your device. Privacy is at the core of our assistive mission.",
+                desc: "Vayu Vision operates with strict data protocols. Your visual data is processed securely.",
               },
             ].map((feature, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
-                whileHover={{ y: -10, borderColor: "rgba(16,185,129,0.3)" }}
-                className="p-8 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md group transition-all relative overflow-hidden"
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
+                className="p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-md group transition-all relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:bg-emerald-500/10 group-hover:rotate-12 transition-all duration-500">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center mb-4 md:mb-6 border border-white/10 group-hover:bg-emerald-500/10 group-hover:rotate-12 transition-all duration-500">
                   {feature.icon}
                 </div>
-                <h3 className="text-2xl font-bold mb-3 tracking-tight">{feature.title}</h3>
-                <p className="text-zinc-400 leading-relaxed font-light">{feature.desc}</p>
-                
-                {/* Tiny corner glow */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3 tracking-tight">{feature.title}</h3>
+                <p className="text-sm md:text-base text-zinc-400 leading-relaxed font-light">{feature.desc}</p>
               </motion.div>
             ))}
           </section>
@@ -814,21 +815,26 @@ export default function App() {
 
           {/* Captions for Deaf / Non-verbal modes */}
           {(mode === "deaf" || mode === "non-verbal") && (
-            <div className="w-full max-w-2xl mt-auto space-y-3">
-              {captions.map((caption, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-2xl text-lg md:text-2xl font-medium leading-relaxed shadow-lg ${
-                    caption.startsWith("You:")
-                      ? "bg-indigo-500/80 backdrop-blur-md ml-auto max-w-[80%]"
-                      : "bg-black/60 backdrop-blur-md border border-white/10"
-                  }`}
-                >
-                  {caption}
-                </motion.div>
-              ))}
+            <div className="w-full max-w-2xl mt-auto space-y-4 px-2">
+              <AnimatePresence initial={false}>
+                {captions.map((caption, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    className={`relative p-5 md:p-8 rounded-[1.8rem] text-xl md:text-3xl font-medium leading-tight shadow-2xl transition-all border ${
+                      caption.startsWith("You:")
+                        ? "bg-emerald-500/90 text-black border-emerald-400 ml-auto max-w-[85%] rounded-br-none"
+                        : "bg-black/80 backdrop-blur-3xl border-white/20 text-white max-w-[95%] rounded-bl-none overflow-hidden"
+                    }`}
+                  >
+                    {!caption.startsWith("You:") && (
+                      <div className="absolute top-0 left-0 w-1.5 h-full bg-emerald-500" />
+                    )}
+                    {caption}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           )}
         </div>
